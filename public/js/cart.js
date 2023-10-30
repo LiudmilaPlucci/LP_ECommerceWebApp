@@ -17,3 +17,79 @@ const createSmallCards = (data) => {
                 </div>
     `;
 }
+
+let totalBill = 0;
+
+const setProducts = (name) => {
+    const element = document.querySelector(`.${name}`);
+    let data = JSON.parse(localStorage.getItem(name));
+    if(data == null) {
+        element.innerHTML = `<img src="../img/cart.png" class="empty-card-img" alt="">`;
+    } else {
+        for(let i=0; i < data.length; i++) {
+            element.innerHTML += createSmallCards(data[i]);
+            if(name === 'cart') {
+                totalBill += Number(data[i].sellPrice * data[i].item);
+            }
+        }
+        updateBill();
+    }
+
+    setupEvents(name);
+}
+
+const updateBill = () => {
+    let billPrice = document.querySelector('.bill');
+    billPrice.innerHTML = `$${totalBill}`;
+}
+
+const setupEvents = (name) => {
+    // setup counter event
+    const counterMinus = document.querySelector(`.${name} .decrement`);
+    const counterPlus = document.querySelector(`.${name} .increment`);
+    const counts = document.querySelector(`.${name} .item-count`);
+    const price = document.querySelector(`.${name} .sm-price`);
+    const deleteBtn = document.querySelector(`.${name} .sm-delete`);
+
+    let product = JSON.parse(localStorage.getItem(name));
+
+    counts.forEach((item, i) => {
+        let cost = Number(price[i].getAttribute('data-price'));
+
+        counterMinus[i].addEventListener('click', () => {
+            if(item.innerHTML > 1) {
+                item.innerHTML--;
+                totalBill -= cost;
+                price[i].innerHTML = `$${item.innerHTML * cost}`;
+                if(name === 'cart') {
+                    updateBill();
+                }
+                product[i].item = item.innerHTML;
+                localStorage.setItem(name, JSON.stringify(product));
+            }
+        })
+        counterPlus[i].addEventListener('click', () => {
+            if(item.innerHTML < 9) {
+                item.innerHTML++;
+                totalBill += cost;
+                price[i].innerHTML = `$${item.innerHTML * cost}`;
+                if(name === 'cart') {
+                    updateBill();
+                }
+                product[i].item = item.innerHTML;
+                localStorage.setItem(name, JSON.stringify(product));
+            }
+        })
+    })
+
+    deleteBtn.forEach((item, i) => {
+        item.addEventListener('click', () => {
+            product = product.filter((data, index) => index !== i)
+            localStorage.setItem(name, JSON.stringify(product));
+            location.reload();
+        })
+    })
+}
+
+setProducts('cart');
+setProducts('wishlist');
