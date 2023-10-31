@@ -3,7 +3,9 @@ const admin = require('firebase-admin');
 const bcrypt = require('bcrypt');
 const path = require('path');
 
+//firebase admin setup
 let serviceAccount = require("./public/credentials/lpecommercewebapp-2efd5-firebase-adminsdk-kuvn3-c1af2be8c9.json");
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
@@ -26,7 +28,6 @@ app.get("/signup", (req, res) => {
 })
 app.post("/signup", (req, res) => {
     console.log(req.body);
-    // res.json("data received");
 
     let { name, email, password, number, tac, notification } = req.body;
     //form response validation
@@ -43,6 +44,7 @@ app.post("/signup", (req, res) => {
     } else if(!tac) {
         return res.json({'alert': 'Please agree to the terms and conditions.'});
     }
+
     //store user in db
     db.collection('users').doc(email).get()
         .then(user => {
@@ -67,6 +69,42 @@ app.post("/signup", (req, res) => {
                 })
             }
         })
+})
+
+//log in route
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(staticPath, "login.html"));
+})
+
+app.post("/login", (req, res) => {
+    let { email, password } = req.body;
+
+    if (!email.length || !password.length) {
+        return res.json({'alert': 'fill all the inputs'})
+    }
+
+    db.collection('users')
+        .doc(email)
+        .get()
+        .then(user => {
+            if(!user.exists) { // if email does not exist
+                return res.json({'alert': 'log in email does not exists'})
+            } else {
+                bcrypt.compare(password, user.data().password, (err, result) => {
+                    if(result) {
+                       let data = user.data();
+                       return res.json({
+                           name: data.name,
+                           email: data.email,
+                           seller: data.seller,
+                       })
+                    } else{
+                        return res.json({'alert': 'password incorrect'});
+                    }
+                })
+            }
+        })
+
 })
 app.get("/product", (req, res) => {
     res.sendFile(path.join(staticPath, "product.html"));
@@ -244,6 +282,30 @@ app.post('/order', (req, res) => {
             })
         })
 } )
+
+//seller route
+app.get('/seller', (req, res) => {
+    res.sendFile(path.join(staticPath, "seller.html"));
+})
+
+app.post('/seller', (req, res) => {
+    let { name, about, address, number, tac, legit, email} = req.body;
+    if(!name.length || !address.length || about.length || !number.length < 10 || !Number(number)) {
+        return res.json({'alert': 'some information(s) is/are invalid'})
+    } else if(!tac || !legit) {
+        return  res.json({'alert': 'you must agree to our terms and conditions'})
+    } else{
+        // update users seller status here
+        db.collection('sellers').doc(email).set(req.body)
+            .then(data => {
+                db.collection('user').doc(email).update({
+                    seller: true
+                }).then(data => {
+                    res.json(true);
+                })
+            })
+    }
+})
 
 app.get("/404", (req, res) => {
     res.sendFile(path.join(staticPath, "404.html"));
