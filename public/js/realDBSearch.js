@@ -18,7 +18,7 @@ products.on("value", function (snapshot) {
 
         })
 
-        createProductSlider('You may also liked', 'product-you-may-also-liked', youMayAlsoLikedResult);
+        createProductSlider('You may also like', 'product-you-may-also-liked', youMayAlsoLikedResult);
     }
 })
 

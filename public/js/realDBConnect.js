@@ -64,7 +64,7 @@ function loadData() {
 
         createProductSlider('Accessories', 'product-accessories', accessoriesResult);
         createProductSlider('Shoes', 'product-shoes', shoesResult);
-        createProductSlider('You may also liked', 'product-you-may-also-liked', youMayAlsoLikedResult);
+        createProductSlider('You may also like', 'product-you-may-also-liked', youMayAlsoLikedResult);
     });
 }
 
