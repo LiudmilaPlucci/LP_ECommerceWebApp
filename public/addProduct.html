@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Clothing | Add Product</title>
+    <title> Clothing | Add Product </title>
 
     <link rel="stylesheet" href="css/signup.css">
     <link rel="stylesheet" href="css/addProduct.css">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="img/favicon_io/site.web-manifest">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400&display=swap" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 </head>
+
 <body>
 <img src="img/loader.gif" class="loader" alt="">
 
@@ -42,30 +41,54 @@
                 <img src="img/camera-icon.png" alt="">
                 <p class="text">upload images</p>
             </div>
-            <form>
-                <div class="upload-catalogue">
-                    <input type="file" class="file-upload" id="first-file-upload-btn" hidden>
-                    <label for="first-file-upload-btn" class="upload-image"></label>
-                    <input type="file" class="file-upload" id="second-file-upload-btn" hidden>
-                    <label for="second-file-upload-btn" class="upload-image"></label>
-                    <input type="file" class="file-upload" id="third-file-upload-btn" hidden>
-                    <label for="third-file-upload-btn" class="upload-image"></label>
-                    <input type="file" class="file-upload" id="fourth-file-upload-btn" hidden>
-                    <label for="fourth-file-upload-btn" class="upload-image"></label>
-                </div>
-            </form>
+            <div class="upload-progress">
+                <progress value="0" max="100" id="uploader">0%</progress>
+            </div>
+            <div class="upload-catalogue">
+                <input type="file" value="upload" class="file-upload" accept="image/*" id="first-file-upload-btn"
+                       hidden>
+                <label for="first-file-upload-btn" class="upload-image"></label>
+                <input type="file" value="upload" class="file-upload" accept="image/*" id="second-file-upload-btn"
+                       hidden>
+                <label for="second-file-upload-btn" class="upload-image"></label>
+                <input type="file" value="upload" class="file-upload" accept="image/*" id="third-file-upload-btn"
+                       hidden>
+                <label for="third-file-upload-btn" class="upload-image"></label>
+                <input type="file" value="upload" class="file-upload" accept="image/*" id="fourth-file-upload-btn"
+                       hidden>
+                <label for="fourth-file-upload-btn" class="upload-image"></label>
+            </div>
         </div>
+
+<!--        <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>-->
+        <script>
+            // Initialize Firebase
+
+            //YOU NEED TO GET YOUR OWN CONFIG SETTINGS!!!!!!!!!!!
+            const firebaseConfig = {
+                apiKey: "AIzaSyBOT8anAw6_uCx1ry-If7K_z_y842nOiUw",
+                authDomain: "ecommerce2-aa05a.firebaseapp.com",
+                databaseURL: "https://ecommerce2-aa05a-default-rtdb.firebaseio.com",
+                projectId: "ecommerce2-aa05a",
+                storageBucket: "ecommerce2-aa05a.appspot.com",
+                messagingSenderId: "280685697688",
+                appId: "1:280685697688:web:e5ff639a40da279f7c8eed"
+            };
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.database();
+        </script>
 
         <div class="select-sizes">
             <p class="text">sizes available</p>
             <div class="sizes">
-                <input type="checkbox" class="size-checkbox" id="xs-size" value="xs">
-                <input type="checkbox" class="size-checkbox" id="s-size" value="s">
-                <input type="checkbox" class="size-checkbox" id="m-size" value="m">
-                <input type="checkbox" class="size-checkbox" id="l-size" value="l">
-                <input type="checkbox" class="size-checkbox" id="xl-size" value="xl">
-                <input type="checkbox" class="size-checkbox" id="xxl-size" value="xxl">
-                <input type="checkbox" class="size-checkbox" id="xxx-size" value="xxxl">
+                <input type="checkbox" class="size-checkbox" id="size-0" value="0">
+                <input type="checkbox" class="size-checkbox" id="size-2" value="2">
+                <input type="checkbox" class="size-checkbox" id="size-4" value="4">
+                <input type="checkbox" class="size-checkbox" id="size-6" value="6">
+                <input type="checkbox" class="size-checkbox" id="size-8" value="8">
+                <input type="checkbox" class="size-checkbox" id="size-10" value="10">
+                <input type="checkbox" class="size-checkbox" id="size-12" value="12">
+                <input type="checkbox" class="size-checkbox" id="size-14" value="14">
             </div>
         </div>
     </div>
@@ -76,123 +99,171 @@
         <input type="number" id="sell-price" placeholder="selling price">
     </div>
 
-    <input type="number" id="stock" min="20" placeholder="Items in stocks (minimum 20)">
-    <textarea id="tags" placeholder="Enter categories here. You should start with Men, Women or Accessories. For example, Men, Jeans, Blue etc..."></textarea>
+    <input type="number" id="stock" min="20" placeholder="Items in stocks (minimum 20)"/>
+    <textarea id="tags" placeholder="Enter categories here.
+You should start with Men, Women or Accessories. For example, Men, Jeans, Blue etc..."></textarea>
     <input type="checkbox" class="checkbox" id="tac" checked>"
-    <label for="tac">VFShop takes 30% from your total sell.</label>
+    <label for="tac">AJShop takes 30% from your total sell.</label>
 
     <div class="buttons">
         <button class="btn" id="add-btn">Add product</button>
         <button class="btn" id="save-btn">Save draft</button>
     </div>
 
+    <script type="text/javascript">
+        const fbBucketName = 'img';
+
+        const uploader = document.getElementById('uploader');
+        const uploadImages = document.querySelectorAll('.file-upload');
+        let downloadImagePaths = [];
+
+        uploadImages.forEach((fileUpload, index) => {
+            fileUpload.addEventListener('change', function (e) {
+
+                console.log('file upload event', e);
+
+                // get file
+                const file = e.target.files[0];
+                console.log(file);
+
+                // create a storage ref
+                const storageRef = firebase.storage().ref(`${fbBucketName}/${file.name}`);
+
+                // upload file
+                const uploadTask = storageRef.put(file);
+
+                // update progress bar
+                uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+                    function (snapshot) {
+                        // Get task progress
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        uploader.value = progress;
+                        console.log('Upload is ' + progress + '% done');
+                        switch (snapshot.state) {
+                            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                                console.log('Upload is paused');
+                                break;
+                            case firebase.storage.TaskState.RUNNING: // or 'running'
+                                console.log('Upload is running');
+                                break;
+                        }
+                    }, function (error) {
+                        switch (error.code) {
+                            case 'storage/unauthorized':
+                                // User doesn't have permission to access the object
+                                showAlert("You don't have permission to access");
+                                break;
+
+                            case 'storage/canceled':
+                                // User canceled the upload
+                                showAlert("Upload was cancelled");
+                                break;
+
+                            case 'storage/unknown':
+                                // Unknown error occurred, inspect error.serverResponse
+                                showAlert("Unknown error occurred");
+                                break;
+                        }
+                    }, function () {
+                        // Upload completed successfully,save download URL
+                        const downloadURL = uploadTask.snapshot.downloadURL;
+                        console.log('downloadURL', downloadURL);
+                        downloadImagePaths[index] = downloadURL;
+                        console.log(downloadImagePaths[index]);
+
+                        let label = document.querySelector(`label[for=${fileUpload.id}]`);
+                        label.style.backgroundImage = `url(${downloadURL})`;
+
+                        let productImage = document.querySelector('.product-image');
+                        productImage.style.backgroundImage = `url(${downloadURL})`;
+
+                        let productImageName = document.querySelector('.product-image > p');
+                        console.log(productImageName.innerText);
+                        let imageName = downloadURL.split('/').pop();
+                        imageName = imageName.split('?')[0];
+                        imageName = imageName.split('%2F').pop();
+                        console.log(imageName);
+                        productImageName.innerText = imageName;
+
+                        //check all images
+                        //https://firebasestorage.googleapis.com/v0/b/ajshop-be1e0.appspot.com/o
+                    });
+            });
+        })
+
+        const userEmail = "";
+
+        const validateForm = () => {
+            if (!productName.value.length) {
+                return showAlert('Enter product name.');
+            } else if (shortLine.value.length > 100 || shortLine.value.length < 10) {
+                return showAlert('Short description must be between 10 to 100 letters long.');
+            } else if (!description.value.length) {
+                return showAlert('Enter detail description about the product.');
+            } else if (!downloadImagePaths.length) {
+                return showAlert('Upload at least one product image.');
+            } else if (!sizesSet.length) {
+                return showAlert('Select at least one size.');
+            } else if (!actPrice.value.length || !discountPercentage.value.length || !sellingPrice.value.length) {
+                return showAlert('Add prices and discount.');
+            } else if (stockVal.value < 20) {
+                return showAlert('You should have at least 20 items in stock.');
+            } else if (!tagsSet.value.length) {
+                return showAlert('Enter few tags to help search your product.');
+            } else if (!tacCheck.checked) {
+                showAlert('You must agree to our Terms and Conditions.');
+            }
+            return true;
+        }
+
+        let docName = `${name.toLowerCase()} + ${Math.floor(Math.random() * 5000)}`;
+
+        function writeProductData(
+            productName, shortLine, description, downloadImagePaths,
+            sizesSet, actPrice, discountPercentage,
+            sellingPrice, stockVal, tagsSet, tacCheck, userEmail) {
+            db
+                .ref('products/' + docName)
+                .set({
+                    name: productName.value,
+                    shortDes: shortLine.value,
+                    des: description.value,
+                    images: downloadImagePaths,
+                    sizes: sizesSet,
+                    actualPrice: actPrice.value,
+                    discount: discountPercentage.value,
+                    sellPrice: sellingPrice.value,
+                    stock: stockVal.value,
+                    tags: tagsSet.value,
+                    tac: tacCheck.checked,
+                    email: userEmail
+                });
+            showAlert("Uploaded successfully.");
+        }
+
+        const addProductBtn = document.querySelector("#add-btn");
+        console.log(addProductBtn);
+
+        addProductBtn.addEventListener('click', function (e) {
+            storeSizes();
+            console.log(e);
+
+            if (validateForm()) {
+                loader.style.display = 'block';
+                writeProductData(productName, shortLine, description,
+                    downloadImagePaths, sizesSet, actPrice,
+                    discountPercentage, sellingPrice, stockVal,
+                    tagsSet, tacCheck, userEmail
+                );
+                location.reload();
+            }
+        })
+    </script>
+
 </div>
 
-<!--    <script type="module">-->
-<!--        // Import the functions you need from the SDKs you need-->
-<!--        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";-->
-<!--        // import firebase from "firebase/compat";-->
-<!--        // TODO: Add SDKs for Firebase products that you want to use-->
-<!--        // https://firebase.google.com/docs/web/setup#available-libraries-->
-
-<!--        // Your web app's Firebase configuration-->
-<!--        const firebaseConfig = {-->
-
-<!--        }-->
-
-
-<!--            // Initialize Firebase-->
-<!--       const app = initializeApp(firebaseConfig);-->
-
-<!--        let uploadImages = document.querySelectorAll('.file-upload');-->
-<!--        let fileUploadLabel = document.querySelector('.upload-image');-->
-<!--        const formElem = document.querySelector('form');-->
-<!--        let fileName;-->
-<!--        let imagePaths = [];-->
-
-<!--        function uploadImage(e) {-->
-<!--            let file = e.target.files[0];-->
-<!--            fileName = (e) => e.target.files[0].name;-->
-
-<!--            firebase-->
-<!--                .app()-->
-<!--                .storage()-->
-<!--                .ref('img')-->
-<!--                .child(file.name)-->
-<!--                .put(file)-->
-<!--        }-->
-
-<!--        function getAnImageUrl(filename) {-->
-<!--            let url;-->
-<!--            firebase-->
-<!--                .storage()-->
-<!--                .ref('images')-->
-<!--                .child(filename)-->
-<!--                .getDownloadURL()-->
-<!--                .then(imgUrl => {-->
-<!--                    console.log(imgUrl);-->
-<!--                    url = imgUrl;-->
-<!--                });-->
-<!--            return url;-->
-<!--        }-->
-
-
-<!--        uploadImages.forEach((fileupload, index) => {-->
-<!--            fileupload.addEventListener('change', async (e) => {-->
-<!--                const file = fileupload.files[0];-->
-<!--                let imageUrl;-->
-<!--                console.log(file);-->
-
-<!--                if(file.type.includes('image')) {-->
-<!--                    uploadImage(e);-->
-<!--                    imageUrl = getAnImageUrl(file);-->
-<!--                    imagePaths[index] = imageUrl;-->
-<!--                    console.log(imageUrl);-->
-<!--                    let label = document.querySelector()-->
-
-
-
-<!--                }-->
-
-<!--                if (fileupload.files && fileupload.files.length > 0) {-->
-<!--                    let fileName = '';-->
-<!--                    if (fileupload.files.length === 1) {-->
-<!--                        fileName = fileupload.files[0].name;-->
-<!--                    } else {-->
-<!--                        fileName = fileupload.files.length + ' files selected';-->
-<!--                    }-->
-<!--                    fileUploadLabel.textContent = fileName;-->
-<!--                } else {-->
-<!--                    fileUploadLabel.textContent = 'Select Files';-->
-<!--                }-->
-
-<!--                console.log("file submitting");-->
-
-<!--                e.preventDefault();-->
-<!--                await fetch('/upload', {-->
-<!--                    method: 'POST',-->
-<!--                    body: new FormData(formElem),-->
-<!--                }).then(response => {-->
-<!--                    //document.querySelector('p').textContent = "Successfully uploaded to drive";-->
-<!--                    // document.getElementById("myButton").style.backgroundColor = "green"-->
-<!--                    //document.getElementById('fileInputLabel').textContent = "Select Files";-->
-<!--                    // document.querySelector('p').style.display = 'block';-->
-<!--                    console.log(response);-->
-<!--                }).catch(error => {-->
-<!--                    // document.querySelector('p').textContent = "Was not uploaded" + error;-->
-<!--                    //document.querySelector('p').style.display = 'block';-->
-<!--                    console.error(error);-->
-<!--                });-->
-<!--            });-->
-
-<!--        });-->
-
-
-<!--    </script>-->
-<!--    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>-->
-<!--    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>-->
-
 <script src="js/addProduct.js"></script>
-<script src="js/token.js"></script>
+
 </body>
+
 </html>

@@ -35,10 +35,8 @@ const compareToken = (token, key) => {
         let index2 = char.indexOf(token[i + 1]);
         string += char[index1 + index2];
     }
-    if(string === key){
-        return true;
-    }
-    return false;
+    return string === key;
+
 //     console.log (string);
 //     return string == key;
 }
@@ -47,6 +45,7 @@ const compareToken = (token, key) => {
 
 // send data function
 const sendData = (path, data) => {
+    console.log(path, data)
     fetch(path, {
         method: 'post',
         headers: new Headers({'Content-Type': 'application/json'}),
@@ -63,7 +62,7 @@ const processData = (data) => {
     if(data.alert) {
         showAlert(data.alert);
     } else if (data.name) {
-        location.reload();
+        // location.reload();
         // create authToken
         data.authToken = generateToken(data.email);
         sessionStorage.user = JSON.stringify(data);
@@ -76,7 +75,6 @@ const processData = (data) => {
         location.reload();
     }
 }
-
 
 // alert function
 const showAlert = (msg) => {

@@ -53,10 +53,7 @@ submitBtn.addEventListener('click', () => {
             showAlert('fill all the inputs');
         } else {
             loader.style.display = 'block';
-            sendData('/login', {
-                email: email.value,
-                password: password.value,
-            })
+            sendData('/login', {email: email.value, password: password.value})
         }
     }
 })

@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/women.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/home.css">
 
     <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
@@ -17,8 +18,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Krub:wght@500&display=swap" rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 </head>
-<body>
+<body onload=loadData()>
 <nav class="navbar"></nav>
 
 <div class="content-container image-container background-image">
@@ -30,9 +33,21 @@
 
 </div>
 
+<section class="product women-results" id="womenResults">
+    <section class="card-container"></section>
+</section>
+
+<section class="product product-you-may-also-liked"></section>
+<section class="product product-shoes"></section>
+<section class="product product-accessories"></section>
+
+
+
 <footer></footer>
-<script src="js/nav.js"></script>
-<script src="js/footer.js"></script>
+<script src="../js/realDBConnect.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/home.js"></script>
+<script src="../js/footer.js"></script>
 
 </body>
 </html>

@@ -4,13 +4,22 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 
 //firebase admin setup
-let serviceAccount = require("./public/credentials/lpecommercewebapp-2efd5-firebase-adminsdk-kuvn3-c1af2be8c9.json");
+let serviceAccount = require("./public/credentials/ecommerce2-aa05a-firebase-adminsdk-ccv2v-6b9f2a28ff.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
 let db = admin.firestore();
+const aws = require('aws-sdk');
+const dotenv = require('dotenv');
+
+dotenv.config();
+// aws parameters
+const region = "";
+const bucketName = "";
+
+
 
 let staticPath = path.join(__dirname, "public")
 
@@ -106,6 +115,8 @@ app.post("/login", (req, res) => {
         })
 
 })
+
+//add product
 app.get("/product", (req, res) => {
     res.sendFile(path.join(staticPath, "product.html"));
 })
@@ -122,8 +133,12 @@ app.get("/shoes", (req, res) => {
 app.get("/accessories", (req, res) => {
     res.sendFile(path.join(staticPath, "accessories.html"));
 })
-app.get("/search", (req, res) => {
-    res.sendFile(path.join(staticPath, "search.html"));
+// app.get("/search", (req, res) => {
+//     res.sendFile(path.join(staticPath, "search.html"));
+// })
+
+app.get('/search/:key', (req, res) => {
+    res.sendFile(path.join(staticPath, 'search.html'));
 })
 
 app.get("/cart", (req, res) => {
@@ -136,6 +151,7 @@ app.get("/mail", (req, res) => {
     res.sendFile(path.join(staticPath, "mail.html"));
 })
 
+//add product
 app.get("/add-product", (req, res) => {
     res.sendFile(path.join(staticPath, "addProduct.html"));
 })

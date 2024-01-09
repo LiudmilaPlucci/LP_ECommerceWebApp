@@ -49,16 +49,16 @@ textarea {
     text-transform: capitalize;
 }
 ::placeholder{
-    color: #2a9898;
+    color: #383838;
     text-transform: capitalize;
 }
 
 .submit-btn{
-    width: 350px;
+    width: 300px;
     height: 40px;
     text-align: center;
     line-height: 40px;
-    background: #016565;
+    background: #383838;
     color: #fff;
     border-radius: 2px;
     border: none;
@@ -75,7 +75,7 @@ textarea {
     height: 15px;
     border-radius: 2px;
     background: #fff;
-    border: 1px solid #016565;
+    border: 1px solid #383838;
     cursor: pointer;
 }
 
