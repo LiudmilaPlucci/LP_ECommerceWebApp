@@ -51,11 +51,11 @@
     width: 20%;
     height: 40px;
     padding: 10px 20px;
-    border: none;
+    border: 1px solid #d1d1d1;
     outline: none;
     cursor: pointer;
-    background: #383838;
-    color: #fff;
+    background: none;
+    color: #afa1a1;
     text-transform: capitalize;
     font-size: 15px;
     border-top-right-radius: 10px;

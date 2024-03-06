@@ -1,3 +1,16 @@
+.background-image{
+    width: auto;
+    height: calc(100vh - 100px);
+    display: flex;
+    background: url('../img/men-collection2.png') no-repeat top right fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}
+
 .content-container{
     display: flex;
     flex-direction: column;
@@ -8,7 +21,7 @@
 }
 
 .background-image {
-    background-image: url('../img/men-collection.png');
+    background-image: url('../img/men-collection2.png');
     background-size: cover;
 }
 
@@ -25,7 +38,7 @@
     bottom: 11%;
     justify-content: center;
     text-align: center;
-    color: #982525;
+    color: #050505;
     font-size: 20px;
     text-transform: capitalize;
     padding: 10px;
@@ -40,7 +53,7 @@
     transform: translateX(-50%);
     width: 355px;
     height: 125px;
-    background-color: rgba(183, 252, 252, 0.7);
+    /*background-color: rgba(183, 252, 252, 0.7);*/
     border-radius: 5px;
     z-index: -1; /* color box below the text */
 }
@@ -48,7 +61,7 @@
 .collection-title{
     margin: 20px 0 20px 0;
     text-align: center;
-    color: #fff; /* #016565; */
+    color: #050505; /* #016565; */
     text-transform: capitalize;
     font-size: 40px;
     font-weight: 400;

@@ -121,6 +121,10 @@ app.get("/product", (req, res) => {
     res.sendFile(path.join(staticPath, "product.html"));
 })
 
+app.get("/product/:id", (req, res) => {
+    res.sendFile(path.join(staticPath, "product.html"));
+})
+
 app.get("/women", (req, res) => {
     res.sendFile(path.join(staticPath, "women.html"));
 })

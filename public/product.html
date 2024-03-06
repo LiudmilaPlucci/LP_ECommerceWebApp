@@ -4,52 +4,57 @@
     <meta charset="UTF-8">
     <title>Product - </title>
 
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/product.css">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="img/favicon_io/site.web-manifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="../img/favicon_io/site.web-manifest">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Krub:wght@500&display=swap" rel="stylesheet">
 
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+
 </head>
-<body>
-
+<body onload="loadData()">
     <nav class="navbar"></nav>
-
     <section class="product-details">
         <div class="image-slider">
             <div class="product-images">
-                <img src="img/product image 1.png" class ="active" alt="">
-                <img src="img/product image 2.png" alt="">
-                <img src="img/product image 3.png" alt="">
-                <img src="img/product image 4.png" alt="">
+                <img src="" class ="active" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
             </div>
         </div>
         <div class="details">
-            <h2 class="product-brand">calvin klein</h2>
-            <p class="product-short-des">Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit.</p>
-            <span class="product-price">$99</span>
-            <span class="product-actual-price">$200</span>
-            <span class="product-discount">( 50% off )</span>
+            <h2 class="product-brand"></h2>
+            <p class="product-short-des"></p>
+            <span class="product-price"></span>
+            <span class="product-actual-price"></span>
+            <span class="product-discount"></span>
 
             <p class="product-sub-heading">select size</p>
 
-            <input type="radio" name="size" value="s" checked hidden id="s-size">
-            <label for="s-size" class="size-radio-btn check">s</label>
-            <input type="radio" name="size" value="m" hidden id="m-size">
-            <label for="m-size" class="size-radio-btn">m</label>
-            <input type="radio" name="size" value="l" hidden id="l-size">
-            <label for="l-size" class="size-radio-btn">l</label>
-            <input type="radio" name="size" value="xl" hidden id="xl-size">
-            <label for="xl-size" class="size-radio-btn">xl</label>
-            <input type="radio" name="size" value="xxl" hidden id="xxl-size">
-            <label for="xxl-size" class="size-radio-btn">xxl</label>
+            <input type="radio" name="size" value="0" hidden id="0-size">
+            <label for="0-size" class="size-radio-btn check">0</label>
+            <input type="radio" name="size" value="2" hidden id="2-size">
+            <label for="2-size" class="size-radio-btn">2</label>
+            <input type="radio" name="size" value="4" hidden id="4-size">
+            <label for="4-size" class="size-radio-btn">4</label>
+            <input type="radio" name="size" value="6" hidden id="6-size">
+            <label for="6-size" class="size-radio-btn">6</label>
+            <input type="radio" name="size" value="8" hidden id="8-size">
+            <label for="8-size" class="size-radio-btn">8</label>
+            <input type="radio" name="size" value="10" hidden id="10-size">
+            <label for="10-size" class="size-radio-btn">10</label>
+            <input type="radio" name="size" value="12" hidden id="12-size">
+            <label for="12-size" class="size-radio-btn">12</label>
+            <input type="radio" name="size" value="14" hidden id="14-size">
+            <label for="14-size" class="size-radio-btn">14</label>
 
             <div class="btn-group">
                 <button class="btn cart-btn">add to cart</button>
@@ -60,230 +65,16 @@
 
     <section class="detail-des">
         <h2 class="heading">description</h2>
-        <p class="des">Non-personalised content is influenced by things like the content that you’re currently viewing,
-            activity in your active Search session, and your location.
-            Non-personalised ads are influenced by the content that you’re currently viewing and your general location.
-            Personalised content and ads can also include more relevant results,
-            recommendations and tailored ads based on past activity from this browser, like previous Google searches.
-            We also use cookies and data to tailor the experience to be age-appropriate, if relevant.</p>
+        <p class="des"></p>
     </section>
 
-    <section class="container-for-card-slider"></section>
-
-    <!--    cards container-->
-    <section class="product">
-        <h2 class="product-category">Shirts</h2>
-        <button class="pre-btn"><img src="img/arrow.png" alt=""></button>
-        <button class="nxt-btn"><img src="img/arrow.png" alt=""></button>
-        <div class="product-container">
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card1.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card2.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card3.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card4.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card5.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card6.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card7.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card8.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--    cards container-->
-    <section class="product">
-        <h2 class="product-category">Shoes</h2>
-        <button class="pre-btn"><img src="img/arrow.png" alt=""></button>
-        <button class="nxt-btn"><img src="img/arrow.png" alt=""></button>
-        <div class="product-container">
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card9.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card10.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card11.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card12.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card9.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card10.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card11.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-image">
-                    <span class="discount-tag">50% off</span>
-                    <img src="img/card12.png" class=product-thumb" alt="">
-                    <button class="card-btn">add to wishlist</button>
-                </div>
-                <div class="product-info">
-                    <h2 class="product-brand">brand</h2>
-                    <p class="product-short-des">a short line about the cloth.</p>
-                    <span class="price">$20</span><span class="actual-price">$40</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    <section class="product product-you-may-also-liked"></section>
 
     <footer></footer>
-    <script src="js/nav.js"></script>
-    <script src="js/footer.js"></script>
-    <script src="js/home.js"></script>
-    <script src="js/product.js"></script>
+    <script src="../js/nav.js"></script>
+    <script src="../js/realDBConnect.js"></script>
+    <script src="../js/product.js"></script>
+    <script src="../js/footer.js"></script>
 
 </body>
 </html>

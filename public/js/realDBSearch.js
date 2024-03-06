@@ -7,7 +7,7 @@ products.on("value", function (snapshot) {
     } else {
         snapshot.forEach(function (element) {
             let data = element.val();
-            data.id = element.key.toString().replace("-", "").trim();
+            data.id = element.key.toString().replace("+ ", "").trim();
 
             searchResult = getSearchResult(data);
             console.log(searchResult)

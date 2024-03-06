@@ -81,26 +81,28 @@ const searchBox = document.querySelector('.search-box');
 
 //change searchBtn color if search is not empty
 searchBox.addEventListener('input', () => {
-    if(searchBox.value.length) {
-        searchBtn.style.background = '#BEC6B7';
+    if(searchBox.value.trim().length) {
+        searchBtn.style.background = '#383838';
+        searchBtn.style.color = "#fff";
         searchBtn.style.transition = '.7s';
     } else {
         searchBtn.style.background = 'none';
-        searchBtn.style.transition = '.7s';
+        searchBtn.style.color = "#afa1a1";
+        searchBtn.style.transition = '.7s'
     }
 })
 
 //listen for click --> open search page and input search value to the search url end-point
 searchBtn.addEventListener('click', () => {
     if(searchBox.value.length) {
-        location.href = `/search/${searchBox.value}`;
+        location.href = `/search/${searchBox.value.trim().toLowerCase()}`;
     }
 })
 
 //listen for enter --> open search page and input search value to the search url end-point
 searchBox.addEventListener('keypress', function(event) {
     if(searchBox.value.length && event.keyCode === 13) {
-        location.href = `/search/${searchBox.value}`
+        location.href = `/search/${searchBox.value.trim().toLowerCase()}`
     }
 })
 

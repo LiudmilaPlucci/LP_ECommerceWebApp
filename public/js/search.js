@@ -47,11 +47,6 @@ function getSearchResult(data) {
         return result;
     }
 }
-createInDemandProductSlider();
-
-
-
-
 
 
 
