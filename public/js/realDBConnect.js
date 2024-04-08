@@ -11,6 +11,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const realDBSearch = firebase.database();
 const products = realDBSearch.ref("products");
+const orders = realDBSearch.ref("orders");
 
 //console.log(firebase);
 function cleanTags(tags) {
@@ -119,6 +120,45 @@ function getProductById(data, id) {
     // data.forEach((item) => {
     let itemId = data.id.toString().replaceAll("+ ", "");
     if (itemId === id) {
+        //setting up texts
+        const name =  document.querySelector('.product-brand');
+        const shortDes = document.querySelector('.product-short-des');
+        const des = document.querySelector('.des');
+
+        name.innerHTML = data.name
+        shortDes.innerHTML = data.shortDes;
+        des.innerHTML = data.des;
+
+        // pricing
+        const sellPrice = document.querySelector('.product-price');
+        const actualPrice = document.querySelector('.product-actual-price');
+        const discount = document.querySelector('.product-discount');
+
+        let $$;
+        sellPrice.innerHTML = `$${data.sellPrice}`;
+        actualPrice.innerHTML = `$${data.actualPrice}`;
+        discount.innerHTML = `( ${data.discount}% off )`;
+
+        setData(data)
+
+        // wishlist and cart btn
+        const wishlistBtn = document.querySelector('.wishlist-btn');
+        // wishlistBtn.addEventListener('click', () => {
+        //     wishlistBtn.innerHTML = add_product_to_cart_or_wishlist('wishlist', data);
+        // })
+
+        const cartBtn = document.querySelector('.cart-btn');
+        // cartBtn.addEventListener('click', () => {
+        //     cartBtn.innerHTML = add_product_to_cart_or_wishlist('cart', data);
+        // })
+    }
+    // })
+}
+
+function getOrderById(data, id) {
+    // data.forEach((item) => {
+    let orderId = data.id.toString();
+    if (orderId === id) {
         //setting up texts
         const name =  document.querySelector('.product-brand');
         const shortDes = document.querySelector('.product-short-des');

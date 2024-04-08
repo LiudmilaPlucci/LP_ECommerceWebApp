@@ -84,15 +84,15 @@
 
 .size-radio-btn{
     display: inline-block;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     border: 1px solid #383838;
     border-radius: 50%;
     margin: 10px;
     margin-left: 0;
-    line-height: 80px;
+    line-height: 60px;
     text-transform: uppercase;
     color: #383838;
     cursor: pointer;
