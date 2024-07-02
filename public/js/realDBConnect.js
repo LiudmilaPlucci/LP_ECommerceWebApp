@@ -9,10 +9,11 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 const realDBSearch = firebase.database();
 const products = realDBSearch.ref("products");
 const orders = realDBSearch.ref("orders");
-
+const productsIds = db.ref("productsIds");
 //console.log(firebase);
 function cleanTags(tags) {
     tags = tags.trim().toLowerCase();

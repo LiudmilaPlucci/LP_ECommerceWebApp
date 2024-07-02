@@ -46,56 +46,9 @@ const setData = (data) => {
         }
     })
 
-    //setting up texts
-    // const name = document.querySelector('.product-brand');
-    // const shortDes = document.querySelector('detail-short-des');
-    // const des = document.querySelector('.des');
-
     title.innerHTML += " ";
     title.innerHTML += name.innerHTML = data.name;
-
-    // shortDes .innerHTML = data.des;
-    //
-    // // pricing
-    // const sellPrice = document.querySelector('product-price')
-    // const actualPrice = document.querySelector('product-actual-price')
-    // const discount = document.querySelector('product-discount')
-    //
-    // sellPrice.innerHTML = `$${data.sellPrice}`;
-    // actualPrice.innerHTML = `$${data.sellPrice}`;
-    // discount.innerHTML = `( ${data.discount}% off )`;
-    //
-    // // wishlist and card button
-    // const wishListButton = document.querySelector('.wishlist-btn');
-    // wishListButton.addEventListener('click', () => {
-    //     wishListButton.innerHTML = add_product_to_card_ot_wishlist('wishlist', data);
-    // })
-    //
-    // const cardBtn = document.querySelector('.card-btn');
-    // cardBtn.addEventListener('click', () => {
-    //     cardBtn.innerHTML = add_product_to_card_ot_wishlist('cart', data);
-    // })
 }
-
-// //Fetch data
-// const fetchProductData = () => {
-//     fetch('/get-products', {
-//         method: 'post',
-//         headers: new Headers({'Content-Type': 'application/json'}),
-//         body: JSON.stringify({id: productID})
-//     })
-//         .then(res => res.json())
-//         .then(data => {
-//             setData(data);
-//             getProducts(data.tags[1])
-//                 .then(data => createProductSlider(
-//                     data, '.container-for-card-slider', 'similar product')
-//                 )
-//         })
-//         .catch(err => {
-//             location.replace('/404');
-//         });
-// }
 
 let productId = null;
 products.on("value", function (snapshot) {
@@ -106,7 +59,6 @@ products.on("value", function (snapshot) {
             let data = element.val();
             data.id = element.key.toString().replace("+ ", "").trim();
 
-            let productId = null;
             if (location.pathname !== '/product') {
                 productId = decodeURI(location.pathname.split('/').pop());
             }
@@ -115,102 +67,194 @@ products.on("value", function (snapshot) {
     }
 })
 
+// get current product id
+let currentProductId = getCurrentProductId();
 
+function getCurrentProductId() {
+    if (location.pathname !== '/product') {
 
-function getOrderId() {
-
-    orderid.on("value", function (snapshot) {
-        if (!snapshot.exists()) {
-            console.log("No products found");
-        } else {
-            snapshot.forEach(function (element) {
-                let data = element.val();
-                data.id = element.key.toString().replace("+ ", "").trim();
-
-                if (location.pathname !== '/product') {
-                    productId = decodeURI(location.pathname.split('/').pop());
-                }
-                getProductById(data, productId);
-            })
-        }
-    })
-}
-
-const validateForm = (checkedSizeId) => {
-    if (productId === 0) {
-        return showAlert('Product id not found.');
-    } else if (checkedSizeId == null || checkedSizeId === "") {
-        return showAlert('Please select a size.');
+        return decodeURI(location.pathname.split('/').pop());
     }
-    return true;
+
+    return 0;
 }
 
-let isOrderExisting;
-const orderId = createOrderId();
+console.log(currentProductId);
+
+
+// order
+let orderId = null;
+let productsInActiveOrder = "";
+
+const createOrderId = function () {
+    const date = new Date();
+    console.log("date", date.getTime());
+
+    return date.getTime()
+}
+
+// //fetch active order if exists OR create active order if no orders found in DB
 orders.on("value", function (snapshot) {
     if (!snapshot.exists()) {
-        console.log("No orders found");
-        isOrderExisting = false;
-        createNewOrder(orderId, new Date());
-        isOrderExisting = true;
-        console.log("****************** Order created ");
+        console.log("No orders found.");
     } else {
         snapshot.forEach(function (element) {
             let data = element.val();
-            if (data.active === true) {
-                isOrderExisting = true;
-                getOrderById(data, data.id);
-            } else {
-                isOrderExisting = false;
-                createNewOrder(orderId, new Date());
-                isOrderExisting = true;
-                console.log("******************!!!!!!!!!! Order created ");
+            console.log("Existing Orders in DB: ", data);
+
+            let orders = data.id;
+            let ordersActive = data.active;
+            let tempID = [];
+
+            if (ordersActive !== null) {
+                for (let i = 0; i < ordersActive.length; i++){
+                    if (ordersActive[i]){
+                       tempID.push(orders[i]);
+                        console.log("!!!!!" + tempID);
+                    }
+                }
+                orderId = data.id.valueOf();
+                let active = data[orderId.active]
+                console.log("Active order found: id = ", orderId)
+                if (value.active){
+                    console.log("!!!!!!!!!!" + orderId);
+                }
             }
         })
     }
 })
-const createOrderId = function () {
-    const date = new Date();
-    return date.getTime()
-}
 
-const productsInOrder = [{productId, checkedSizeId, quantity}];
-let totalPrice;
+// //create active order if NO ACTIVE orders found in DB
+if (orderId === null) {
+    console.log("No active orders found.");
 
-function addProductToOrder(
-    orderId, productsInOrder, totalPrice) {
+    orderId = createOrderId();
     db
         .ref('orders/' + orderId)
         .set({
-            products: productsInOrder,
-            total: totalPrice.value
+            id: orderId.valueOf(),
+            active: true
         });
-    showAlert("Product added to cart successfully.");
+
+    console.log("New active order created: id = ", orderId);
 }
 
-function createNewOrder(
-    orderId, orderDate) {
-    db
-        .ref('orders/' + orderId)
-        .set({
-            id: orderId.value,
-            date: orderDate.value,
-            active:true,
+// //fetch productsIDs from active order OR create empty productsIds record in DB
+productsIds.on("value", function (snapshot) {
+    if (!snapshot.exists() && productsInActiveOrder === "") {
+        console.log("No productsInOrder found");
+
+        db
+            .ref('productsIds/')
+            .set({
+                ids: productsInActiveOrder
+            });
+    } else {
+        snapshot.forEach(function (element) {
+            console.log("productsInActiveOrder variable before updating = ", productsInActiveOrder);
+
+            productsInActiveOrder = element.val();
+
+            console.log("productsInActiveOrder variable after updating = ", productsInActiveOrder);
         });
-    showAlert("Order created successfully.");
-}
-
-const addToCartBtn = document.querySelector("#addToCart");
-addToCartBtn.addEventListener('click', function (e) {
-
-    const checkedSizeId = document.querySelector("label[class='size-radio-btn check']").id;
-
-    if (validateForm(checkedSizeId)) {
-        loader.style.display = 'block';
-        addProductToOrder(orderId, productsInOrder, totalPrice);
-        location.reload();
     }
 })
+
+
+
+// function getOrderId() {
+//
+//     orderid.on("value", function (snapshot) {
+//         if (!snapshot.exists()) {
+//             console.log("No products found");
+//         } else {
+//             snapshot.forEach(function (element) {
+//                 let data = element.val();
+//                 data.id = element.key.toString().replace("+ ", "").trim();
+//                 if (location.pathname !== '/product') {
+//                     productId = decodeURI(location.pathname.split('/').pop());
+//                 }
+//                 getProductById(data, productId);
+//             })
+//         }
+//     })
+// }
+//
+// const validateForm = (checkedSizeId) => {
+//     if (productId === 0) {
+//         return showAlert('Product id not found.');
+//     } else if (checkedSizeId == null || checkedSizeId === "") {
+//         return showAlert('Please select a size.');
+//     }
+//     return true;
+// }
+//
+// let isOrderExisting;
+// const orderId = createOrderId();
+// orders.on("value", function (snapshot) {
+//     if (!snapshot.exists()) {
+//         console.log("No orders found");
+//         isOrderExisting = false;
+//         createNewOrder(orderId, new Date());
+//         isOrderExisting = true;
+//         console.log("****************** Order created ");
+//     } else {
+//         snapshot.forEach(function (element) {
+//             let data = element.val();
+//             if (data.active === true) {
+//                 isOrderExisting = true;
+//                 getOrderById(data, data.id);
+//             } else {
+//                 isOrderExisting = false;
+//                 createNewOrder(orderId, new Date());
+//                 isOrderExisting = true;
+//                 console.log("******************!!!!!!!!!! Order created ");
+//             }
+//         })
+//     }
+// })
+// const createOrderId = function () {
+//     const date = new Date();
+//     return date.getTime()
+// }
+//
+// const productsInOrder = [{productId, checkedSizeId, quantity}];
+// let totalPrice;
+//
+// function addProductToOrder(
+//     orderId, productsInOrder, totalPrice) {
+//     db
+//         .ref('orders/' + orderId)
+//         .set({
+//             products: productsInOrder,
+//             total: totalPrice.value
+//         });
+//     showAlert("Product added to cart successfully.");
+// }
+//
+// function createNewOrder(
+//     orderId, orderDate) {
+//     db
+//         .ref('orders/' + orderId)
+//         .set({
+//             id: orderId.value,
+//             date: orderDate.value,
+//             active:true,
+//         });
+//     showAlert("Order created successfully.");
+// }
+//
+// const addToCartBtn = document.querySelector("#addToCart");
+// addToCartBtn.addEventListener('click', function (e) {
+//
+//     const checkedSizeId = document.querySelector("label[class='size-radio-btn check']").id;
+//
+//     if (validateForm(checkedSizeId)) {
+//         loader.style.display = 'block';
+//         addProductToOrder(orderId, productsInOrder, totalPrice);
+//         location.reload();
+//     }
+// })
 
 
 
